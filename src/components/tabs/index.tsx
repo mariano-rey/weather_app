@@ -1,19 +1,16 @@
+import useOptions, { IOptions } from "../../hooks/useOptions";
 import { TabButton } from "../../styles/components/tabs";
 
-interface Props {
-  active: number;
-  tabs: string[];
-  onChange: (index: number) => void;
-}
+const Tabs = (props: IOptions) => {
+  const { activeValue, options, onChange } = useOptions(props);
 
-const Tabs = ({ active, tabs, onChange }: Props) => {
   return (
     <>
-      {tabs.map((label, index) => (
+      {options.map(({ value, label }) => (
         <TabButton
           key={label}
-          isActive={index === active}
-          onClick={() => onChange(index)}
+          isActive={value === activeValue}
+          onClick={() => onChange(value)}
         >
           {label}
         </TabButton>

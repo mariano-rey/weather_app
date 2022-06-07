@@ -1,11 +1,11 @@
-import Select from "./components/select";
-import Tabs from "./components/tabs";
-import { useTabs } from "./components/tabs/useTabs";
-import useMediaQuery from "./hooks/useMediaQuery";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
+import LocationProvider from "./providers/LocationProvider";
 import { GlobalStyle } from "./styles/globalStyles";
-import { Container, Footer, Header, Main } from "./styles/layout";
+import { Container } from "./styles/layout";
 
-const cities = [
+export const cities = [
   "Actual",
   "Bariloche",
   "Fortaleza",
@@ -15,23 +15,16 @@ const cities = [
 ];
 
 function App() {
-  const { isTablet } = useMediaQuery();
-  const { active, changeTab } = useTabs();
-
   return (
     <>
       <GlobalStyle />
-      <Container>
-        <Header>
-          {isTablet ? (
-            <Select options={cities} />
-          ) : (
-            <Tabs active={active} tabs={cities} onChange={changeTab} />
-          )}
-        </Header>
-        <Main>TEST {cities[active]}</Main>
-        <Footer>Ultima actualización: </Footer>
-      </Container>
+      <LocationProvider>
+        <Container>
+          <Header />
+          <Main />
+          <Footer />
+        </Container>
+      </LocationProvider>
     </>
   );
 }

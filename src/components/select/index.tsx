@@ -1,14 +1,15 @@
+import useOptions, { IOptions } from "../../hooks/useOptions";
 import { Container } from "../../styles/components/select";
 
-interface Props {
-  options: string[];
-}
+const Select = (props: IOptions) => {
+  const { activeValue, options, onChange } = useOptions(props);
 
-const Select = ({ options }: Props) => {
   return (
-    <Container>
-      {options.map((label) => (
-        <option key={label}>{label}</option>
+    <Container value={activeValue} onChange={(e) => onChange(e.target.value)}>
+      {options.map(({ value, label }) => (
+        <option key={value} value={value}>
+          {label}
+        </option>
       ))}
     </Container>
   );
